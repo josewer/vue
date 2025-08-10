@@ -1,0 +1,9 @@
+body {
+  background:  #8e9eab;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+}
+
+li {
+  list-style-type: none;
+}
