@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref, watch, watchEffect } from 'vue';
-import FormularioProducto from '../components/FormularioProducto.vue';
-import TablaProductos from '../components/TablaProductos.vue';
+import FormularioProducto from './FormularioProducto.vue';
+import TablaProductos from './TablaProductos.vue';
 import HeaderComponent from '../components/HeaderComponent.vue';
 
 

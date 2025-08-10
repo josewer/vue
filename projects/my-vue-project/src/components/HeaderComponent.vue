@@ -7,6 +7,7 @@
       <ul class="nav-list">
         <li>
           <router-link class="link" to="/">Productos</router-link>
+          <router-link class="link" to="/create">Crear producto</router-link>
           <router-link class="link" to="/animales">Animal</router-link>
           <router-link class="link" to="/peliculas">Peliculas</router-link>
         </li>

@@ -2,9 +2,10 @@
 
 import { ref } from 'vue';
 import { Producto } from '../models/Producto.js';
+import { useProductoStore } from '../stores/producto.js';
+import HeaderComponent from '../components/HeaderComponent.vue';
 
-
-const emit = defineEmits(["addProduct"])
+const productStore = useProductoStore();
 
 const amount = ref();
 const price = ref();
@@ -23,7 +24,8 @@ function addProduct() {
         price.value = '';
         amount.value = '';
 
-        emit("addProduct", product);
+        console.table(product);
+        productStore.addProduct(product);
     }
 }
 
@@ -31,7 +33,9 @@ function addProduct() {
 
 <template>
 
-    <slot name="total"></slot>
+    <HeaderComponent />
+
+    <h3>Total compra: {{ productStore.total.toFixed(2) }} €</h3>
 
     <div id="containerProduct">
         <form @submit.prevent="addProduct">
@@ -40,8 +44,7 @@ function addProduct() {
                 <input id="nameProduct" type="text" v-model="nameProduct" placeholder="Nombre" />
                 <input id="price" type="number" v-model="price" placeholder="Precio" />
                 <input id="amount" type="number" v-model="amount" placeholder="Cantidad" />
-                <button @keydown.enter="addProduct"
-                    :disabled="!nameProduct || !price || !amount">Añadir</button>
+                <button @keydown.enter="addProduct" :disabled="!nameProduct || !price || !amount">Añadir</button>
             </fieldset>
         </form>
     </div>
@@ -112,5 +115,15 @@ button:disabled {
 
 legend {
     text-align: center;
+}
+
+h3 {
+    max-width: 400px;
+    margin: 1.5rem auto 0;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #2a4365;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 </style>

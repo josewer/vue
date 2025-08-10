@@ -5,9 +5,6 @@ export class Producto {
         this.name = name;
         this.amount = amount;
         this.price = price;
-    }
-
-    getTotalPrice() {
-        return (this.amount * this.price);
+        this.total = amount * price;
     }
 }
