@@ -1,34 +1,27 @@
 import { defineStore } from "pinia";
-import { computed, ref } from "vue";
 
-export const useProductoStore = defineStore("productoStore", () => {
+export const useProductoStore = defineStore("productoStore", {
+    state: () => ({
+        products: []
+    }),
 
-    const products = ref([]);
+    getters: {
+        total: (state) => state.products.reduce((sum, p) => sum + p.total, 0),
 
-    function addProduct(product) {
-        products.value.push(product);
-    }
+        getProduct: (state) => {
+            return (id) => state.products.find((p) => p.id === id) ?? null;
+        }
+    },
 
-    function removeProduct(index) {
-        products.value.splice(index, 1);
-    }
+    actions: {
+        addProduct(product) {
+            this.products.push(product);
+        },
 
-    const total = computed(() => {
+        removeProduct(index) {
+            this.products.splice(index, 1);
+        }
+    },
 
-        let sum = 0;
-
-        for (let product of products.value) { sum += product.total; }
-
-        return sum;
-    });
-
-
-    return {
-        products,
-        addProduct,
-        removeProduct,
-        total
-    }
-}, {
     persist: true
 });

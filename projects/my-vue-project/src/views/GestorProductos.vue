@@ -18,7 +18,7 @@ function removeItem(index) {
 const total = computed(() => {
 
   let sum = 0;
-
+ 
   for (let product of products.value) { sum += product.getTotalPrice(); }
 
   return sum;

@@ -30,7 +30,7 @@ const removeItem = (index) => {
     <tbody>
       <tr v-for="(producto, index) in productStore.products" :key="producto.id">
         <td> {{ index + 1 }} </td>
-        <td> {{ producto.name }} </td>
+        <td> <router-link :to="{name: 'detalleProducto' , params: {id : producto.id} }" > {{ producto.name }}  </router-link>  </td>
         <td> {{ producto.price }} </td>
         <td> {{ producto.amount }} </td>
         <td> {{ producto.total.toFixed(2) }} € </td>

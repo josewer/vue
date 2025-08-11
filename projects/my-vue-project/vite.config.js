@@ -6,5 +6,9 @@ export default defineConfig({
   plugins: [vue()],
   server: {
     historyApiFallback: true // 🔹 Esto asegura que HMR funcione en rutas profundas
+  }, 
+  test: {
+    globals: true,
+    environment : "jsdom"
   }
 })

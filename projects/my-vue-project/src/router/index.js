@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
-import GestorProductos from "../views/GestorProductos.vue";
 import AnimalCard from "../views/AnimalCard.vue";
 
 import NotFoud from "../views/NotFoud.vue";
 import FormularioPeliculas from "../views/FormularioPeliculas.vue";
 import TablaProductos from "../views/TablaProductos.vue";
 import FormularioProducto from "../views/FormularioProducto.vue";
+import DetallesProducto from "../views/DetallesProducto.vue";
 
 
 const routes = [
@@ -18,6 +18,11 @@ const routes = [
         path: "/create",
         name: "createProduct",
         component: FormularioProducto
+    },
+    {
+        path: "/detalle/:id",
+        name: "detalleProducto",
+        component: DetallesProducto
     },
     {
         path: "/animales",

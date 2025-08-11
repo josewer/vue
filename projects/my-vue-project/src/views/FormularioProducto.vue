@@ -4,6 +4,7 @@ import { ref } from 'vue';
 import { Producto } from '../models/Producto.js';
 import { useProductoStore } from '../stores/producto.js';
 import HeaderComponent from '../components/HeaderComponent.vue';
+import router  from '../router/index.js';
 
 const productStore = useProductoStore();
 
@@ -26,6 +27,7 @@ function addProduct() {
 
         console.table(product);
         productStore.addProduct(product);
+        router.push({name : "tablaProductos"})
     }
 }
 
