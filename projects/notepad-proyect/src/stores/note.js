@@ -9,7 +9,7 @@ export const useNotesStore = defineStore("notes", () => {
     const URL_API = 'https://notes.free.beeceptor.com';
 
     const getNotes = async () => {
-  
+
         try {
             status.value = Status.LOADING;
 
@@ -17,9 +17,13 @@ export const useNotesStore = defineStore("notes", () => {
                 method: "GET"
             });
 
+            if (!response.ok) {
+                throw new Error(`Error HTTP: ${response.status}`);
+            }
+
             notes.value = await response.json();
 
-            status.value = Status.SUCESS;
+            status.value = Status.SUCCESS;
             console.table(notes.value)
         } catch (e) {
             console.error(e)
@@ -47,15 +51,19 @@ export const useNotesStore = defineStore("notes", () => {
         try {
             status.value = Status.LOADING;
 
-            const response = await fetch(URL_API , {
-                method: "POST" ,
+            const response = await fetch(URL_API, {
+                method: "POST",
                 body: JSON.stringify(note),
-                headers: {  "Content-type": "application/json"  }
+                headers: { "Content-type": "application/json" }
             });
+
+            if (!response.ok) {
+                throw new Error(`Error HTTP: ${response.status}`);
+            }
 
             notes.value.push(note);
 
-            status.value = Status.SUCESS;
+            status.value = Status.SUCCESS;
         } catch (e) {
             console.error(e);
             status.value = Status.ERROR;

@@ -10,7 +10,7 @@ const toast = useToast();
 
 const handleSubmit = () => {
 
-    if (!description.value) {
+    if (!description.value || description.trim() === "") {
 
         toast.error("La nota no puede estar vacía", {
             position: "top-right",
