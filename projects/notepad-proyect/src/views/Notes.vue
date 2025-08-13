@@ -7,11 +7,7 @@ import CreateNote from '../components/CreateNote.vue';
 
 const notesStore = useNotesStore();
 console.table(notesStore.notes)
-const n = ref({
-    id: 4,
-    description: "I am studing vuuue",
-    check: false
-})
+
 </script>
 
 <template>

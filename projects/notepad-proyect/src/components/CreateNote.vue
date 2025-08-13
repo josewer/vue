@@ -1,7 +1,8 @@
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { useNotesStore } from '../stores/note'
 import { useToast } from 'vue-toastification';
+import { Status } from '../enums/status';
 
 const description = ref();
 const noteStore = useNotesStore();
@@ -10,13 +11,39 @@ const toast = useToast();
 const handleSubmit = () => {
 
     if (!description.value) {
-        toast.error('La nota no puede estar vacía')
+
+        toast.error("La nota no puede estar vacía", {
+            position: "top-right",
+            timeout: 1000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true
+        });
+
         return;
     }
 
     noteStore.addNote(description.value);
     description.value = "";
 };
+
+onMounted(async () => {
+
+    await noteStore.getNotes();
+
+    console.log(noteStore.status);
+
+    toast.error("Algo salio mal al cargar los datos", {
+        position: "bottom-right",
+        timeout: 1000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true
+    });
+});
+
 
 </script>
 
