@@ -1,16 +1,20 @@
 <script setup>
-import { reactive } from 'vue';
 import HeaderComponent from '../components/HeaderComponent.vue';
+import * as Yup from 'yup'
+import { ErrorMessage, Field, Form } from 'vee-validate';
 
-const movie = reactive({
-    title: "",
-    duration: "",
-    director: ""
+const schema = Yup.object({
+    titulo: Yup.string().required("El titulo no puede ser vacio"),
+    director: Yup.string().required("El director no puede ser vacio"),
+    duracion: Yup.number().typeError("La duración debe ser un número").required("La duracion no puede ser vacio")
 });
 
-const handleSubmit = () => {
-    console.table(movie);
-}
+
+
+const handleSubmit = (values , { resetForm }) => {
+    console.table(values);
+    resetForm();
+};
 
 </script>
 
@@ -19,20 +23,20 @@ const handleSubmit = () => {
     <HeaderComponent />
 
     <div>
-        <form @submit.prevent="handleSubmit">
-
-            <input id="inputTitle" type="text" v-model="movie.title" placeholder="Titulo" />
-            <input id="inputDuraction" type="number" v-model="movie.duration" placeholder="Duración" />
-            <input id="inputDirector" type="text" v-model="movie.director" placeholder="Director" />
+        <Form :validation-schema="schema" @submit="handleSubmit">
+            <Field id="inputTitle" name="titulo" placeholder="Titulo" />
+            <ErrorMessage name="titulo"/>
+            <Field id="inputDuraction" name="duracion" placeholder="Duración" />
+            <ErrorMessage name="duracion"/>
+            <Field id="inputDirector" name="director" placeholder="Director" />
+            <ErrorMessage name="director"/>
             <button>Enviar</button>
-
-        </form>
+        </Form>
     </div>
 
 </template>
 
 <style scoped>
-    
 div {
     display: flex;
     align-items: center;
@@ -64,7 +68,4 @@ button:hover {
     border-radius: 10px;
     padding: 10px;
 }
-
-
-
 </style>
